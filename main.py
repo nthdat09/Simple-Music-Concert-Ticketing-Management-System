@@ -21,6 +21,8 @@ def mainMenu():
             break
         else:
             print("Invalid choice, please try again.")
+            input("Enter any key to continue ")
+
 def eventManager():
     while(True):
         os.system('cls')
@@ -67,6 +69,7 @@ def customerManager():
             break
         else:
             print("Invalid choice, please try again.")
+            input("Enter any key to continue ")
 
 def tableManager():
     while(True):
@@ -123,8 +126,7 @@ def functionManager():
         print("1. View all functions")
         print("2. Create new function")
         print("3. Delete function")
-        print("4. Update function")
-        print("5. Back to database manager menu")
+        print("4. Back to database manager menu")
         choice = input("Enter your choice: ")
         if choice == "1":
             Controller.databaseManagerController.viewAllFunctions()
@@ -133,11 +135,10 @@ def functionManager():
         elif choice == "3":
             Controller.databaseManagerController.deleteFunction()
         elif choice == "4":
-            Controller.databaseManagerController.updateFunction()
-        elif choice == "5":
             break
         else:
             print("Invalid choice, please try again.")
+            input("Enter any key to continue ")
 
 
 def procedureManager():
@@ -147,8 +148,7 @@ def procedureManager():
         print("1. View all procedures")
         print("2. Create new procedure")
         print("3. Delete procedure")
-        print("4. Update procedure")
-        print("5. Back to database manager menu")
+        print("4. Back to database manager menu")
         choice = input("Enter your choice: ")
         if choice == "1":
             Controller.databaseManagerController.viewAllProcedures()
@@ -157,8 +157,6 @@ def procedureManager():
         elif choice == "3":
             Controller.databaseManagerController.deleteProcedure()
         elif choice == "4":
-            Controller.databaseManagerController.updateProcedure()
-        elif choice == "5":
             break
         else:
             print("Invalid choice, please try again.")
@@ -168,7 +166,7 @@ def executeCommand():
     while(True):
         os.system('cls')
         print("Execute a command")
-        print("1. Execute a command")
+        print("1. Enter a command")
         print("2. Back to database manager menu")
         choice = input("Enter your choice: ")
         if choice == "1":
@@ -177,6 +175,7 @@ def executeCommand():
             break
         else:
             print("Invalid choice, please try again.")
+            input("Enter any key to continue ")
 
 
 def databaseManager():

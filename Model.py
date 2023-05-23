@@ -17,7 +17,7 @@ class customer:
         self.totalpoint = totalpoint
 
     def __str__(self):
-        print("ID: " + str(self.id) + ", Name: " + self.name + ", Phone number: " + self.phone_number + ", Email: " + self.email + ", Address: " + self.address + ", Type: " + self.type + ", Total point: " + str(self.totalpoint))
+        print("- ID: " + str(self.id) + ", Name: " + self.name + ", Phone number: " + self.phone_number + ", Email: " + self.email + ", Address: " + self.address + ", Type: " + self.type + ", Total point: " + str(self.totalpoint))
 
 class event:
     id = 0
@@ -42,5 +42,5 @@ class event:
         self.des = des
 
     def __str__(self):
-        print("ID: " + str(self.id) + ", Name: " + self.name + ", Stage ID: " + str(self.stage_id) + ", Artist ID: " + str(self.artist_id) + ", Date: " + self.date + ", Open time: " + self.open_time + ", End time: " + self.end_time + ", Quantity: " + str(self.quantity) + ", Description: " + self.des)
+        print("- ID: " + str(self.id) + ", Name: " + self.name + ", Stage ID: " + str(self.stage_id) + ", Artist ID: " + str(self.artist_id) + ", Date: " + self.date + ", Open time: " + self.open_time + ", End time: " + self.end_time + ", Quantity: " + str(self.quantity) + ", Description: " + self.des)
 
