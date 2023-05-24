@@ -1,56 +1,59 @@
-import Model
 import connectDB
+
+
 class eventManagerController:
 
     @classmethod
     def viewAllEvents(cls):
         connectDB.eventManagerDB.viewAllEvents()
-        print("Enter any key to continue:")
-        input()
+        input("Enter any key to continue ")
 
     @classmethod
     def addNewEvent(cls):
         connectDB.eventManagerDB.addNewEvent()
-        print("Enter any key to continue:")
-        input()
+        input("Enter any key to continue ")
 
     @classmethod
     def deleteEvent(cls):
         connectDB.eventManagerDB.deleteEvent()
-        print("Enter any key to continue:")
-        input()
+        input("Enter any key to continue ")
 
     @classmethod
     def updateEvent(cls):
         connectDB.eventManagerDB.updateEvent()
-        print("Enter any key to continue:")
-        input()
+        input("Enter any key to continue ")
+
+    @classmethod
+    def searchEvent(cls):
+        connectDB.eventManagerDB.searchEvent()
+        input("Enter any key to continue ")
 
 
 class customerManagerController:
     @classmethod
     def viewAllCustomers(cls):
         connectDB.customerManagerDB.viewAllCustomers()
-        print("Enter any key to continue:")
-        input()
+        input("Enter any key to continue ")
 
     @classmethod
     def addNewCustomer(cls):
         connectDB.customerManagerDB.addNewCustomer()
-        print("Enter any key to continue:")
-        input()
+        input("Enter any key to continue ")
 
     @classmethod
     def deleteCustomer(cls):
         connectDB.customerManagerDB.deleteCustomer()
-        print("Enter any key to continue:")
-        input()
+        input("Enter any key to continue ")
 
     @classmethod
     def updateCustomer(cls):
         connectDB.customerManagerDB.updateCustomer()
-        print("Enter any key to continue:")
-        input()
+        input("Enter any key to continue ")
+
+    @classmethod
+    def searchCustomer(cls):
+        connectDB.customerManagerDB.searchCustomer()
+        input("Enter any key to continue ")
 
 
 class databaseManagerController:
@@ -58,50 +61,42 @@ class databaseManagerController:
     @classmethod
     def executeCommand(cls):
         connectDB.databaseManagerDB.executeCommand()
-        print("Enter any key to continue:")
-        input()
+        input("Enter any key to continue ")
 
     @classmethod
     def viewAllTables(cls):
         connectDB.databaseManagerDB.viewAllTables()
-        print("Enter any key to continue:")
-        input()
+        input("Enter any key to continue ")
 
     @classmethod
     def createNewTable(cls):
         connectDB.databaseManagerDB.createNewTable()
-        print("Enter any key to continue:")
-        input()
+        input("Enter any key to continue ")
 
     @classmethod
     def deleteTable(cls):
         connectDB.databaseManagerDB.deleteTable()
-        print("Enter any key to continue:")
-        input()
+        input("Enter any key to continue ")
 
     @classmethod
     def updateTable(cls):
         connectDB.databaseManagerDB.updateTable()
-        print("Enter any key to continue:")
-        input()
+        input("Enter any key to continue ")
 
     @classmethod
     def viewAllTriggers(cls):
         connectDB.databaseManagerDB.viewAllTriggers()
-        print("Enter any key to continue:")
-        input()
+        input("Enter any key to continue ")
 
     @classmethod
     def createNewTrigger(cls):
         connectDB.databaseManagerDB.createNewTrigger()
-        print("Enter any key to continue:")
-        input()
+        input("Enter any key to continue ")
 
     @classmethod
     def deleteTrigger(cls):
         connectDB.databaseManagerDB.deleteTrigger()
-        print("Enter any key to continue:")
-        input()
+        input("Enter any key to continue ")
 
     @classmethod
     def updateTrigger(cls):
@@ -110,49 +105,39 @@ class databaseManagerController:
     @classmethod
     def viewAllFunctions(cls):
         connectDB.databaseManagerDB.viewAllFunctions()
-        print("Enter any key to continue:")
-        input()
+        input("Enter any key to continue ")
 
     @classmethod
     def createNewFunction(cls):
         connectDB.databaseManagerDB.createNewFunction()
-        print("Enter any key to continue:")
-        input()
+        input("Enter any key to continue ")
 
     @classmethod
     def deleteFunction(cls):
         connectDB.databaseManagerDB.deleteFunction()
-        print("Enter any key to continue:")
-        input()
+        input("Enter any key to continue ")
 
     @classmethod
     def updateFunction(cls):
         connectDB.databaseManagerDB.updateFunction()
-        print("Enter any key to continue:")
-        input()
+        input("Enter any key to continue ")
 
     @classmethod
     def viewAllProcedures(cls):
         connectDB.databaseManagerDB.viewAllProcedures()
-        print("Enter any key to continue:")
-        input()
+        input("Enter any key to continue ")
 
     @classmethod
     def createNewProcedure(cls):
         connectDB.databaseManagerDB.createNewProcedure()
-        print("Enter any key to continue:")
-        input()
+        input("Enter any key to continue ")
 
     @classmethod
     def deleteProcedure(cls):
         connectDB.databaseManagerDB.deleteProcedure()
-        print("Enter any key to continue:")
-        input()
+        input("Enter any key to continue ")
 
     @classmethod
     def showColumnsOfTable(cls):
         connectDB.databaseManagerDB.showColumnsOfTable()
-        print("Enter any key to continue:")
-        input()
-
-
+        input("Enter any key to continue ")

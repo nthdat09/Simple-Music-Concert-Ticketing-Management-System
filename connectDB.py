@@ -2,13 +2,15 @@ import os
 
 import mysql.connector
 import Model
+
 db = mysql.connector.connect(
-    user = 'mysql-py',
-    password = '123456a@b@',
-    host = 'localhost',
-    database = 'dbms_py'
+    user='mysql-py',
+    password='123456a@b@',
+    host='localhost',
+    database='dbms_py'
 )
 cursor = db.cursor()
+
 
 class eventManagerDB:
     @classmethod
@@ -22,8 +24,6 @@ class eventManagerDB:
                 eventList.append(str(y))
             eventModel = Model.event(*eventList)
             Model.event.__str__(eventModel)
-
-
 
     @classmethod
     def addNewEvent(cls):
@@ -43,7 +43,8 @@ class eventManagerDB:
         Description = input()
 
         try:
-            cursor.execute("INSERT INTO dbms_py.event VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", (ID, Name, 1, 1, Date, Open, Close, Quantity, Description))
+            cursor.execute("INSERT INTO dbms_py.event VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
+                           (ID, Name, 1, 1, Date, Open, Close, Quantity, Description))
             print("Event added successfully!")
             print("Are you sure you want to commit? (Enter Y/y to commit, other to rollback)")
             choice = input()
@@ -190,7 +191,8 @@ class eventManagerDB:
                     print("Enter new event quantity: ")
                     newQuantity = input()
 
-                    cursor.execute("UPDATE dbms_py.event SET EVT_QUANTITY = %s WHERE EVT_ID = %s", (newQuantity, eventID))
+                    cursor.execute("UPDATE dbms_py.event SET EVT_QUANTITY = %s WHERE EVT_ID = %s",
+                                   (newQuantity, eventID))
                     print("Event updated successfully!")
 
                     print("Are you sure you want to commit? (Enter Y/y to commit, other to rollback)")
@@ -210,7 +212,8 @@ class eventManagerDB:
                     print("Enter new event description: ")
                     newDescription = input()
 
-                    cursor.execute("UPDATE dbms_py.event SET EVT_DESCRIPTION = %s WHERE EVT_ID = %s", (newDescription, eventID))
+                    cursor.execute("UPDATE dbms_py.event SET EVT_DESCRIPTION = %s WHERE EVT_ID = %s",
+                                   (newDescription, eventID))
                     print("Event updated successfully!")
 
                     print("Are you sure you want to commit? (Enter Y/y to commit, other to rollback)")
@@ -241,7 +244,9 @@ class eventManagerDB:
                     print("Enter new event description: ")
                     newDescription = input()
 
-                    cursor.execute("UPDATE dbms_py.event SET EVT_NAME = %s, EVT_DATE = %s, EVT_OPEN_TIME = %s, EVT_END_TIME = %s, EVT_QUANTITY = %s, EVT_DESCRIPTION = %s WHERE EVT_ID = %s", (newName, newDate, newOpen, newClose, newQuantity, newDescription, eventID))
+                    cursor.execute(
+                        "UPDATE dbms_py.event SET EVT_NAME = %s, EVT_DATE = %s, EVT_OPEN_TIME = %s, EVT_END_TIME = %s, EVT_QUANTITY = %s, EVT_DESCRIPTION = %s WHERE EVT_ID = %s",
+                        (newName, newDate, newOpen, newClose, newQuantity, newDescription, eventID))
                     print("Event updated successfully!")
 
                     print("Are you sure you want to commit? (Enter Y/y to commit, other to rollback)")
@@ -263,6 +268,206 @@ class eventManagerDB:
             else:
                 print("Invalid choice!")
 
+    @classmethod
+    def searchEvent(cls):
+        os.system('cls')
+        print('\t\t\t\t\t\tSEARCH EVENT')
+        print("1. Search by event ID")
+        print("2. Search by event name")
+        print("3. Search by event date")
+        print("4. Search by event open time")
+        print("5. Search by event end time")
+        print("6. Search by event quantity")
+        print("7. Search by event description")
+        print("8. Cancel")
+        print("Enter your choice: ")
+        choice = input()
+
+        if choice == "1":
+            os.system('cls')
+            print("Enter event ID: ")
+            eventID = input()
+
+            try:
+                cursor.execute("SELECT * FROM dbms_py.event WHERE EVT_ID = %s", [eventID])
+                result = cursor.fetchall()
+                if len(result) == 0:
+                    print("Event not found!")
+                    input("Press any key to continue...")
+                    cls.searchEvent()
+                else:
+                    for x in result:
+                        eventList = []
+                        for y in x:
+                            eventList.append(str(y))
+                        eventModel = Model.event(eventList[0], eventList[1], eventList[2], eventList[3], eventList[4],
+                                                 eventList[5], eventList[6], eventList[7], eventList[8])
+                        Model.event.__str__(eventModel)
+            except Exception as e:
+                
+                print("Event not found!")
+                input("Press any key to continue...")
+                cls.searchEvent()
+
+        elif choice == "2":
+            os.system('cls')
+            print("Enter event name: ")
+            eventName = input()
+
+            try:
+                cursor.execute("SELECT * FROM dbms_py.event WHERE EVT_NAME = %s", [eventName])
+                result = cursor.fetchall()
+                if len(result) == 0:
+                    print("Event not found!")
+                    input("Press any key to continue...")
+                    cls.searchEvent()
+                else:
+                    for x in result:
+                        eventList = []
+                        for y in x:
+                            eventList.append(str(y))
+                        eventModel = Model.event(eventList[0], eventList[1], eventList[2], eventList[3], eventList[4],
+                                                 eventList[5], eventList[6], eventList[7], eventList[8])
+                        Model.event.__str__(eventModel)
+            except Exception as e:
+                
+                print("Event not found!")
+                input("Press any key to continue...")
+                cls.searchEvent()
+
+        elif choice == "3":
+            os.system('cls')
+            print("Enter event date (YYYY-MM-DD): ")
+            eventDate = input()
+
+            try:
+                cursor.execute("SELECT * FROM dbms_py.event WHERE EVT_DATE = %s", [eventDate])
+                result = cursor.fetchall()
+                if len(result) == 0:
+                    print("Event not found!")
+                    input("Press any key to continue...")
+                    cls.searchEvent()
+                else:
+                    for x in result:
+                        eventList = []
+                        for y in x:
+                            eventList.append(str(y))
+                        eventModel = Model.event(eventList[0], eventList[1], eventList[2], eventList[3], eventList[4],
+                                                 eventList[5], eventList[6], eventList[7], eventList[8])
+                        Model.event.__str__(eventModel)
+            except Exception as e:
+                
+                print("Event not found!")
+                input("Press any key to continue...")
+                cls.searchEvent()
+
+        elif choice == "4":
+            os.system('cls')
+            print("Enter event open time (HH:MM:SS): ")
+            eventOpen = input()
+
+            try:
+                cursor.execute("SELECT * FROM dbms_py.event WHERE EVT_OPEN_TIME = %s", [eventOpen])
+                result = cursor.fetchall()
+                if len(result) == 0:
+                    print("Event not found!")
+                    input("Press any key to continue...")
+                    cls.searchEvent()
+                else:
+                    for x in result:
+                        eventList = []
+                        for y in x:
+                            eventList.append(str(y))
+                        eventModel = Model.event(eventList[0], eventList[1], eventList[2], eventList[3], eventList[4],
+                                                 eventList[5], eventList[6], eventList[7], eventList[8])
+                        Model.event.__str__(eventModel)
+            except Exception as e:
+                print("Event not found!")
+                input("Press any key to continue...")
+                cls.searchEvent()
+
+        elif choice == "5":
+            os.system('cls')
+            print("Enter event end time (HH:MM:SS): ")
+            eventClose = input()
+
+            try:
+                cursor.execute("SELECT * FROM dbms_py.event WHERE EVT_END_TIME = %s", [eventClose])
+                result = cursor.fetchall()
+                if len(result) == 0:
+                    print("Event not found!")
+                    input("Press any key to continue...")
+                    cls.searchEvent()
+                else:
+                    for x in result:
+                        eventList = []
+                        for y in x:
+                            eventList.append(str(y))
+                        eventModel = Model.event(eventList[0], eventList[1], eventList[2], eventList[3], eventList[4],
+                                                 eventList[5], eventList[6], eventList[7], eventList[8])
+                        Model.event.__str__(eventModel)
+            except Exception as e:
+                print("Event not found!")
+                input("Press any key to continue...")
+                cls.searchEvent()
+
+        elif choice == "6":
+            os.system('cls')
+            print("Enter event quantity: ")
+            eventQuantity = input()
+
+            try:
+                cursor.execute("SELECT * FROM dbms_py.event WHERE EVT_QUANTITY = %s", [eventQuantity])
+                result = cursor.fetchall()
+                if len(result) == 0:
+                    print("Event not found!")
+                    input("Press any key to continue...")
+                    cls.searchEvent()
+                else:
+                    for x in result:
+                        eventList = []
+                        for y in x:
+                            eventList.append(str(y))
+                        eventModel = Model.event(eventList[0], eventList[1], eventList[2], eventList[3], eventList[4],
+                                                 eventList[5], eventList[6], eventList[7], eventList[8])
+                        Model.event.__str__(eventModel)
+            except Exception as e:
+                
+                print("Event not found!")
+                input("Press any key to continue...")
+                cls.searchEvent()
+
+        elif choice == "7":
+            os.system('cls')
+            print("Enter event description: ")
+            eventDescription = input()
+
+            try:
+                cursor.execute("SELECT * FROM dbms_py.event WHERE EVT_DESCRIPTION = %s", [eventDescription])
+                result = cursor.fetchall()
+                if len(result) == 0:
+                    print("Event not found!")
+                    input("Press any key to continue...")
+                    cls.searchEvent()
+                else:
+                    for x in result:
+                        eventList = []
+                        for y in x:
+                            eventList.append(str(y))
+                        eventModel = Model.event(eventList[0], eventList[1], eventList[2], eventList[3], eventList[4],
+                                                 eventList[5], eventList[6], eventList[7], eventList[8])
+                        Model.event.__str__(eventModel)
+            except Exception as e:
+                
+                print("Event not found!")
+                input("Press any key to continue...")
+                cls.searchEvent()
+
+        elif choice == "8":
+            print("Search cancelled!")
+        else:
+            print("Invalid choice!")
+            input("Press any key to continue...")
 
 
 class customerManagerDB:
@@ -277,7 +482,8 @@ class customerManagerDB:
             customerList = []
             for y in x:
                 customerList.append(str(y))
-            customerModel = Model.customer(customerList[0], customerList[1], customerList[2], customerList[3], customerList[4], customerList[5], customerList[6])
+            customerModel = Model.customer(customerList[0], customerList[1], customerList[2], customerList[3],
+                                           customerList[4], customerList[5], customerList[6])
             Model.customer.__str__(customerModel)
 
     @classmethod
@@ -297,7 +503,8 @@ class customerManagerDB:
         print("Enter customer point: ")
         customerPoint = input()
         try:
-            cursor.execute("INSERT INTO dbms_py.customer VALUES (%s, %s, %s, %s, %s, %s, %s)", (customerID, customerName, customerPhone, customerEmail, customerAddress, customerType, customerPoint))
+            cursor.execute("INSERT INTO dbms_py.customer VALUES (%s, %s, %s, %s, %s, %s, %s)", (
+            customerID, customerName, customerPhone, customerEmail, customerAddress, customerType, customerPoint))
             print("Customer added successfully!")
 
             print("Are you sure you want to commit? (Enter Y/y to commit, other to rollback)")
@@ -381,7 +588,8 @@ class customerManagerDB:
                 print("Enter new customer phone number: ")
                 newPhone = input()
                 try:
-                    cursor.execute("UPDATE dbms_py.customer SET CUS_PHONE_NUMBER = %s WHERE CUS_ID = %s", (newPhone, customerID))
+                    cursor.execute("UPDATE dbms_py.customer SET CUS_PHONE_NUMBER = %s WHERE CUS_ID = %s",
+                                   (newPhone, customerID))
                     print("Customer updated successfully!")
 
                     print("Are you sure you want to commit? (Enter Y/y to commit, other to rollback)")
@@ -393,12 +601,13 @@ class customerManagerDB:
                         db.rollback()
                         print("Rollback successfully!")
                 except Exception as e:
-                        print("Customer updated failed!")
+                    print("Customer updated failed!")
             elif choice == '3':
                 print("Enter new customer email: ")
                 newEmail = input()
                 try:
-                    cursor.execute("UPDATE dbms_py.customer SET CUS_EMAIL = %s WHERE CUS_ID = %s", (newEmail, customerID))
+                    cursor.execute("UPDATE dbms_py.customer SET CUS_EMAIL = %s WHERE CUS_ID = %s",
+                                   (newEmail, customerID))
                     print("Customer updated successfully!")
                     print("Are you sure you want to commit? (Enter Y/y to commit, other to rollback)")
                     choice = input()
@@ -414,7 +623,8 @@ class customerManagerDB:
                 print("Enter new customer address: ")
                 newAddress = input()
                 try:
-                    cursor.execute("UPDATE dbms_py.customer SET CUS_ADDRESS = %s WHERE CUS_ID = %s", (newAddress, customerID))
+                    cursor.execute("UPDATE dbms_py.customer SET CUS_ADDRESS = %s WHERE CUS_ID = %s",
+                                   (newAddress, customerID))
                     print("Customer updated successfully!")
 
                     print("Are you sure you want to commit? (Enter Y/y to commit, other to rollback)")
@@ -450,7 +660,8 @@ class customerManagerDB:
                 print("Enter new customer point: ")
                 newPoint = input()
                 try:
-                    cursor.execute("UPDATE dbms_py.customer SET CUS_TOTAL_POINT = %s WHERE CUS_ID = %s", (newPoint, customerID))
+                    cursor.execute("UPDATE dbms_py.customer SET CUS_TOTAL_POINT = %s WHERE CUS_ID = %s",
+                                   (newPoint, customerID))
                     print("Customer updated successfully!")
 
                     print("Are you sure you want to commit? (Enter Y/y to commit, other to rollback)")
@@ -479,7 +690,9 @@ class customerManagerDB:
                 print("Enter new customer point: ")
                 newPoint = input()
                 try:
-                    cursor.execute("UPDATE dbms_py.customer SET CUS_NAME = %s, CUS_PHONE_NUMBER = %s, CUS_EMAIL = %s, CUS_ADDRESS = %s, CUS_TYPE = %s, CUS_TOTAL_POINT = %s WHERE CUS_ID = %s", (newName, newPhone, newEmail, newAddress, newType, newPoint, customerID))
+                    cursor.execute(
+                        "UPDATE dbms_py.customer SET CUS_NAME = %s, CUS_PHONE_NUMBER = %s, CUS_EMAIL = %s, CUS_ADDRESS = %s, CUS_TYPE = %s, CUS_TOTAL_POINT = %s WHERE CUS_ID = %s",
+                        (newName, newPhone, newEmail, newAddress, newType, newPoint, customerID))
                     print("Customer updated successfully!")
 
                     print("Are you sure you want to commit? (Enter Y/y to commit, other to rollback)")
@@ -498,10 +711,234 @@ class customerManagerDB:
             else:
                 print("Invalid choice!")
 
+    @classmethod
+    def searchCustomer(cls):
+        os.system('cls')
+        print("\t\t\t\t\t\tSEARCH CUSTOMER")
+        print("1. Search by ID")
+        print("2. Search by name")
+        print("3. Search by phone number")
+        print("4. Search by email")
+        print("5. Search by address")
+        print("6. Search by type")
+        print("7. Search by point")
+        print("8. Cancel")
+        print("Enter your choice: ")
+        choice = input()
+
+        if choice == '1':
+            os.system('cls')
+            print("Enter customer ID: ")
+            customerID = input()
+            try:
+                cursor.execute("SELECT * FROM dbms_py.customer WHERE CUS_ID = %s", (customerID,))
+                result = cursor.fetchall()
+                if len(result) == 0:
+                    print("Customer not found!")
+                    input("Press any key to continue...")
+                    cls.searchCustomer()
+                else:
+                    for x in result:
+                        customerList = []
+
+                        for y in x:
+                            customerList.append(str(y))
+                        customerModel = Model.customer(customerList[0], customerList[1], customerList[2],
+                                                       customerList[3], customerList[4], customerList[5],
+                                                       customerList[6])
+                        Model.customer.__str__(customerModel)
+
+            except Exception as e:
+                print("Customer not found!")
+
+                input("Press any key to continue...")
+                cls.searchCustomer()
+
+        elif choice == '2':
+            os.system('cls')
+            print("Enter customer name: ")
+            customerName = input()
+            try:
+                cursor.execute("SELECT * FROM dbms_py.customer WHERE CUS_NAME = %s", (customerName,))
+                result = cursor.fetchall()
+                if len(result) == 0:
+                    print("Customer not found!")
+
+                    input("Press any key to continue...")
+                    cls.searchCustomer()
+                else:
+                    for x in result:
+                        customerList = []
+
+                        for y in x:
+                            customerList.append(str(y))
+                        customerModel = Model.customer(customerList[0], customerList[1], customerList[2],
+                                                       customerList[3], customerList[4], customerList[5],
+                                                       customerList[6])
+                        Model.customer.__str__(customerModel)
+
+            except Exception as e:
+                print("Customer not found!")
+
+                input("Press any key to continue...")
+                cls.searchCustomer()
+
+        elif choice == '3':
+            os.system('cls')
+            print("Enter customer phone number: ")
+            customerPhone = input()
+            try:
+                cursor.execute("SELECT * FROM dbms_py.customer WHERE CUS_PHONE_NUMBER = %s", (customerPhone,))
+                result = cursor.fetchall()
+                if len(result) == 0:
+                    print("Customer not found!")
+
+                    input("Press any key to continue...")
+                    cls.searchCustomer()
+                else:
+                    for x in result:
+                        customerList = []
+
+                        for y in x:
+                            customerList.append(str(y))
+                        customerModel = Model.customer(customerList[0], customerList[1], customerList[2],
+                                                       customerList[3], customerList[4], customerList[5],
+                                                       customerList[6])
+                        Model.customer.__str__(customerModel)
+
+            except Exception as e:
+                print("Customer not found!")
+
+                input("Press any key to continue...")
+                cls.searchCustomer()
+
+        elif choice == '4':
+            os.system('cls')
+            print("Enter customer email: ")
+            customerEmail = input()
+            try:
+                cursor.execute("SELECT * FROM dbms_py.customer WHERE CUS_EMAIL = %s", (customerEmail,))
+                result = cursor.fetchall()
+                if len(result) == 0:
+                    print("Customer not found!")
+
+                    input("Press any key to continue...")
+                    cls.searchCustomer()
+                else:
+                    for x in result:
+                        customerList = []
+
+                        for y in x:
+                            customerList.append(str(y))
+                        customerModel = Model.customer(customerList[0], customerList[1], customerList[2],
+                                                       customerList[3], customerList[4], customerList[5],
+                                                       customerList[6])
+                        Model.customer.__str__(customerModel)
+
+            except Exception as e:
+                print("Customer not found!")
+
+                input("Press any key to continue...")
+                cls.searchCustomer()
+
+        elif choice == '5':
+            os.system('cls')
+            print("Enter customer address: ")
+            customerAddress = input()
+            try:
+                cursor.execute("SELECT * FROM dbms_py.customer WHERE CUS_ADDRESS = %s", (customerAddress,))
+                result = cursor.fetchall()
+                if len(result) == 0:
+                    print("Customer not found!")
+
+                    input("Press any key to continue...")
+                    cls.searchCustomer()
+                else:
+                    for x in result:
+                        customerList = []
+
+                        for y in x:
+                            customerList.append(str(y))
+                        customerModel = Model.customer(customerList[0], customerList[1], customerList[2],
+                                                       customerList[3], customerList[4], customerList[5],
+                                                       customerList[6])
+                        Model.customer.__str__(customerModel)
+
+            except Exception as e:
+                print("Customer not found!")
+
+                input("Press any key to continue...")
+                cls.searchCustomer()
+
+        elif choice == '6':
+            os.system('cls')
+            print("Enter customer type: ")
+            customerType = input()
+            try:
+                cursor.execute("SELECT * FROM dbms_py.customer WHERE CUS_TYPE = %s", (customerType,))
+                result = cursor.fetchall()
+                if len(result) == 0:
+                    print("Customer not found!")
+
+                    input("Press any key to continue...")
+                    cls.searchCustomer()
+                else:
+                    for x in result:
+                        customerList = []
+
+                        for y in x:
+                            customerList.append(str(y))
+                        customerModel = Model.customer(customerList[0], customerList[1], customerList[2],
+                                                       customerList[3], customerList[4], customerList[5],
+                                                       customerList[6])
+                        Model.customer.__str__(customerModel)
+
+            except Exception as e:
+                print("Customer not found!")
+
+                input("Press any key to continue...")
+                cls.searchCustomer()
+
+
+        elif choice == '7':
+            os.system('cls')
+            print("Enter customer point: ")
+            customerPoint = input()
+            try:
+                cursor.execute("SELECT * FROM dbms_py.customer WHERE CUS_TOTAL_POINT = %s", (customerPoint,))
+                result = cursor.fetchall()
+                if len(result) == 0:
+                    print("Customer not found!")
+
+                    input("Press any key to continue...")
+                    cls.searchCustomer()
+                else:
+                    for x in result:
+                        customerList = []
+
+                        for y in x:
+                            customerList.append(str(y))
+                        customerModel = Model.customer(customerList[0], customerList[1], customerList[2],
+                                                       customerList[3], customerList[4], customerList[5],
+                                                       customerList[6])
+                        Model.customer.__str__(customerModel)
+
+            except Exception as e:
+                print("Customer not found!")
+
+                input("Press any key to continue...")
+                cls.searchCustomer()
+
+        elif choice == '8':
+            print("Cancel searching!")
+
+        else:
+            print("Invalid choice!")
+
 
 class databaseManagerDB:
 
-# Command
+    # Command
     @classmethod
     def executeCommand(cls):
         os.system('cls')
@@ -535,11 +972,11 @@ class databaseManagerDB:
         cursor.execute("SHOW TABLES")
         result = cursor.fetchall()
         for x in result:
-            print(count , ". ", end=" ")
+            print(count, ". ", end=" ")
             print(x)
             count += 1
 
-# Table
+    # Table
 
     @classmethod
     def createNewTable(cls):
@@ -557,7 +994,6 @@ class databaseManagerDB:
                 columnType = input()
                 print("Enter column length: ")
                 columnLength = input()
-
 
                 cursor.execute("CREATE TABLE %s (%s %s(%s))" % (tableName, columnName, columnType, columnLength))
                 print("Table created successfully!")
@@ -691,7 +1127,8 @@ class databaseManagerDB:
                 print("Enter new column length: ")
                 newColumnLength = input()
                 try:
-                    cursor.execute("ALTER TABLE %s MODIFY %s %s(%s)" % (tableName, columnName, newColumnType, newColumnLength))
+                    cursor.execute(
+                        "ALTER TABLE %s MODIFY %s %s(%s)" % (tableName, columnName, newColumnType, newColumnLength))
                     print("Table updated successfully!")
 
                     print("Are you sure you want to commit? (Enter Y/y to commit, other to rollback)")
@@ -713,7 +1150,6 @@ class databaseManagerDB:
             else:
                 print("Invalid choice!")
 
-
     @classmethod
     def showColumnsOfTable(cls):
         cls.viewAllTables()
@@ -729,8 +1165,6 @@ class databaseManagerDB:
                 print("Table does not exist!")
             else:
                 print("Show columns failed!")
-
-
 
     # Procedure
 
@@ -781,7 +1215,7 @@ class databaseManagerDB:
             print("Enter commmands to create procedure: ")
             procedureContent = input()
 
-            beforeExecute = 0;
+            beforeExecute = 0
             cursor.execute("SHOW PROCEDURE STATUS WHERE Db = 'dbms_py'")
             rowAffected = cursor.fetchall()
             for x in rowAffected:
@@ -791,7 +1225,7 @@ class databaseManagerDB:
                 cursor.execute(procedureContent)
                 print("Procedure created successfully!")
 
-                afterExecute = 0;
+                afterExecute = 0
                 cursor.execute("SHOW PROCEDURE STATUS WHERE Db = 'dbms_py'")
                 rowAffected = cursor.fetchall()
                 for x in rowAffected:
@@ -814,9 +1248,6 @@ class databaseManagerDB:
             print("Cancel create procedure!")
         else:
             print("Invalid choice!")
-
-
-
 
     @classmethod
     def deleteProcedure(cls):
@@ -842,7 +1273,7 @@ class databaseManagerDB:
             else:
                 print("Procedure deleted failed!")
 
-# Function
+    # Function
     @classmethod
     def viewAllFunctions(cls):
         os.system('cls')
@@ -851,7 +1282,7 @@ class databaseManagerDB:
         cursor.execute("SHOW FUNCTION STATUS WHERE db = 'dbms_py'")
         result = cursor.fetchall()
         for x in result:
-            print(count , ". ", end=" ")
+            print(count, ". ", end=" ")
             print(x)
             count += 1
 
@@ -880,7 +1311,8 @@ class databaseManagerDB:
             print("Enter function body: ")
             functionBody = input()
             try:
-                cursor.execute("CREATE FUNCTION %s (%s) RETURNS %s BEGIN %s END" % (functionName, parameterName, returnType, functionBody))
+                cursor.execute("CREATE FUNCTION %s (%s) RETURNS %s BEGIN %s END" % (
+                functionName, parameterName, returnType, functionBody))
                 print("Function created successfully!")
 
                 print("Are you sure you want to commit? (Enter Y/y to commit, other to rollback)")
@@ -942,8 +1374,6 @@ class databaseManagerDB:
         else:
             print("Invalid choice!")
 
-
-
     @classmethod
     def deleteFunction(cls):
         cls.viewAllFunctions()
@@ -982,7 +1412,7 @@ class databaseManagerDB:
         print("Enter your choice: ")
         choice = input()
 
-    #Trigger
+    # Trigger
 
     @classmethod
     def createNewTrigger(cls):
@@ -1006,7 +1436,8 @@ class databaseManagerDB:
             print("Enter name of the statement: (SELECT/INSERT/UPDATE/DELETE)")
             statementName = input()
             try:
-                cursor.execute("CREATE TRIGGER %s %s %s ON %s FOR EACH ROW %s" % (triggerName, actionName, eventName, tableName, statementName))
+                cursor.execute("CREATE TRIGGER %s %s %s ON %s FOR EACH ROW %s" % (
+                triggerName, actionName, eventName, tableName, statementName))
                 print("Trigger created successfully!")
 
                 print("Are you sure you want to commit? (Enter Y/y to commit, other to rollback)")
@@ -1100,7 +1531,7 @@ class databaseManagerDB:
         cursor.execute("SHOW TRIGGERS")
         result = cursor.fetchall()
         for x in result:
-            print(count , ". ", end=" ")
+            print(count, ". ", end=" ")
             print(x)
             count += 1
 
@@ -1121,13 +1552,3 @@ class databaseManagerDB:
 
         except Exception as e:
             print("Rollback failed!")
-
-
-
-
-
-            
-
-
-
-

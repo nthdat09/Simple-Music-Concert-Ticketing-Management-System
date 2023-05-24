@@ -1,8 +1,9 @@
-import os   
+import os
 import Controller
 
+
 def mainMenu():
-    while(True):
+    while True:
         os.system('cls')
         print("Music concert ticket booking manager program")
         print("1. Event manager")
@@ -23,56 +24,65 @@ def mainMenu():
             print("Invalid choice, please try again.")
             input("Enter any key to continue ")
 
+
 def eventManager():
-    while(True):
+    while True:
         os.system('cls')
         print("Event manager")
         print("1. View all events")
-        print("2. Add new event")
-        print("3. Delete event")
-        print("4. Update event")
-        print("5. Main menu")
+        print("2. Search event")
+        print("3. Add new event")
+        print("4. Delete event")
+        print("5. Update event")
+        print("6. Main menu")
         choice = input("Enter your choice: ")
         os.system('cls')
         if choice == "1":
             Controller.eventManagerController.viewAllEvents()
         elif choice == "2":
-            Controller.eventManagerController.addNewEvent()
+            Controller.eventManagerController.searchEvent()
         elif choice == "3":
-            Controller.eventManagerController.deleteEvent()
+            Controller.eventManagerController.addNewEvent()
         elif choice == "4":
-            Controller.eventManagerController.updateEvent()
+            Controller.eventManagerController.deleteEvent()
         elif choice == "5":
+            Controller.eventManagerController.updateEvent()
+        elif choice == "6":
             break
         else:
             print("Invalid choice, please try again.")
 
+
 def customerManager():
-    while(True):
+    while True:
         os.system('cls')
         print("Customer manager")
         print("1. View all customers")
-        print("2. Add new customer")
-        print("3. Delete customer")
-        print("4. Update customer")
-        print("5. Main menu")
+        print("2. Search customer")
+        print("3. Add new customer")
+        print("4. Delete customer")
+        print("5. Update customer")
+        print("6. Main menu")
         choice = input("Enter your choice: ")
         if choice == "1":
             Controller.customerManagerController.viewAllCustomers()
         elif choice == "2":
-            Controller.customerManagerController.addNewCustomer()
+            Controller.customerManagerController.searchCustomer()
         elif choice == "3":
-            Controller.customerManagerController.deleteCustomer()
+            Controller.customerManagerController.addNewCustomer()
         elif choice == "4":
-            Controller.customerManagerController.updateCustomer()
+            Controller.customerManagerController.deleteCustomer()
         elif choice == "5":
+            Controller.customerManagerController.updateCustomer()
+        elif choice == "6":
             break
         else:
             print("Invalid choice, please try again.")
             input("Enter any key to continue ")
 
+
 def tableManager():
-    while(True):
+    while True:
         os.system('cls')
         print("Table manager")
         print("1. View all tables")
@@ -99,7 +109,7 @@ def tableManager():
 
 
 def triggerManager():
-    while(True):
+    while True:
         os.system('cls')
         print("Trigger manager")
         print("1. View all triggers")
@@ -120,7 +130,7 @@ def triggerManager():
 
 
 def functionManager():
-    while(True):
+    while True:
         os.system('cls')
         print("Function manager")
         print("1. View all functions")
@@ -142,7 +152,7 @@ def functionManager():
 
 
 def procedureManager():
-    while(True):
+    while True:
         os.system('cls')
         print("Procedure manager")
         print("1. View all procedures")
@@ -163,7 +173,7 @@ def procedureManager():
 
 
 def executeCommand():
-    while(True):
+    while True:
         os.system('cls')
         print("Execute a command")
         print("1. Enter a command")
@@ -179,7 +189,7 @@ def executeCommand():
 
 
 def databaseManager():
-    while(True):
+    while True:
         os.system('cls')
         print("Database manager")
         print("1. Table manager")
@@ -204,6 +214,6 @@ def databaseManager():
         else:
             print("Invalid choice, please try again.")
 
+
 class main:
     mainMenu()
-
