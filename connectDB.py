@@ -488,6 +488,7 @@ class customerManagerDB:
 
     @classmethod
     def addNewCustomer(cls):
+        os.system('cls')
         print("Enter customer ID: ")
         customerID = input()
         print("Enter customer name: ")
