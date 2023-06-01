@@ -146,3 +146,8 @@ class databaseManagerController:
     def runProcedure(cls):
         connectDB.databaseManagerDB.runProcedure()
         input("Enter any key to continue ")
+
+    @classmethod
+    def runFunction(cls):
+        connectDB.databaseManagerDB.runFunction()
+        input("Enter any key to continue ")

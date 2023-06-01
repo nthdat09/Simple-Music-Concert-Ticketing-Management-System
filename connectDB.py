@@ -1559,18 +1559,47 @@ class databaseManagerDB:
         cls.viewAllProcedures();
         print("Enter command to run procedure: ")
         command = input()
-        try:
-            cursor.execute(command)
-            print("Procedure run successfully!")
+        if command == "":
+            print("Command is empty!")
+            return
+        else:
+            try:
+                cursor.execute(command)
+                print("Command executed successfully!")
 
-            print("Are you sure you want to commit? (Enter Y/y to commit, other to rollback)")
-            choice = input()
-            if choice == "Y" or choice == "y":
-                db.commit()
-                print("Commit successfully!")
-            else:
-                db.rollback()
-                print("Rollback successfully!")
+                print("Are you sure you want to commit? (Enter Y/y to commit, other to rollback)")
+                choice = input()
+                if choice == "Y" or choice == "y":
+                    db.commit()
+                    print("Commit successfully!")
+                else:
+                    db.rollback()
+                    print("Rollback successfully!")
 
-        except Exception as e:
-            print("Procedure run failed!")
+            except Exception as e:
+                print("Command executed failed!")
+
+    @classmethod
+    def runFunction(cls):
+        cls.viewAllFunctions();
+        print("Enter command to run function: ")
+        command = input()
+        if command == "":
+            print("Command is empty!")
+            return
+        else:
+            try:
+                cursor.execute(command)
+                print("Command executed successfully!")
+
+                print("Are you sure you want to commit? (Enter Y/y to commit, other to rollback)")
+                choice = input()
+                if choice == "Y" or choice == "y":
+                    db.commit()
+                    print("Commit successfully!")
+                else:
+                    db.rollback()
+                    print("Rollback successfully!")
+
+            except Exception as e:
+                print("Command executed failed!")

@@ -134,17 +134,20 @@ def functionManager():
         os.system('cls')
         print("Function manager")
         print("1. View all functions")
-        print("2. Create new function")
-        print("3. Delete function")
-        print("4. Back to database manager menu")
+        print("2. Run function")
+        print("3. Create new function")
+        print("4. Delete function")
+        print("5. Back to database manager menu")
         choice = input("Enter your choice: ")
         if choice == "1":
             Controller.databaseManagerController.viewAllFunctions()
         elif choice == "2":
-            Controller.databaseManagerController.createNewFunction()
+            Controller.databaseManagerController.runFunction()
         elif choice == "3":
-            Controller.databaseManagerController.deleteFunction()
+            Controller.databaseManagerController.createNewFunction()
         elif choice == "4":
+            Controller.databaseManagerController.deleteFunction()
+        elif choice == "5":
             break
         else:
             print("Invalid choice, please try again.")
