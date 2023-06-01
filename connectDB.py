@@ -1553,3 +1553,24 @@ class databaseManagerDB:
 
         except Exception as e:
             print("Rollback failed!")
+
+    @classmethod
+    def runProcedure(cls):
+        cls.viewAllProcedures();
+        print("Enter command to run procedure: ")
+        command = input()
+        try:
+            cursor.execute(command)
+            print("Procedure run successfully!")
+
+            print("Are you sure you want to commit? (Enter Y/y to commit, other to rollback)")
+            choice = input()
+            if choice == "Y" or choice == "y":
+                db.commit()
+                print("Commit successfully!")
+            else:
+                db.rollback()
+                print("Rollback successfully!")
+
+        except Exception as e:
+            print("Procedure run failed!")

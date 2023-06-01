@@ -141,3 +141,8 @@ class databaseManagerController:
     def showColumnsOfTable(cls):
         connectDB.databaseManagerDB.showColumnsOfTable()
         input("Enter any key to continue ")
+
+    @classmethod
+    def runProcedure(cls):
+        connectDB.databaseManagerDB.runProcedure()
+        input("Enter any key to continue ")

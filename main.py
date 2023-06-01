@@ -157,16 +157,19 @@ def procedureManager():
         print("Procedure manager")
         print("1. View all procedures")
         print("2. Create new procedure")
-        print("3. Delete procedure")
-        print("4. Back to database manager menu")
+        print("3. Run procedure")
+        print("4. Delete procedure")
+        print("5. Back to database manager menu")
         choice = input("Enter your choice: ")
         if choice == "1":
             Controller.databaseManagerController.viewAllProcedures()
         elif choice == "2":
             Controller.databaseManagerController.createNewProcedure()
         elif choice == "3":
-            Controller.databaseManagerController.deleteProcedure()
+            Controller.databaseManagerController.runProcedure()
         elif choice == "4":
+            Controller.databaseManagerController.deleteProcedure()
+        elif choice == "5":
             break
         else:
             print("Invalid choice, please try again.")
