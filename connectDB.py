@@ -1571,15 +1571,6 @@ class databaseManagerDB:
                 for result in cursor.stored_results():
                     print(result.fetchall())
 
-                # print("Are you sure you want to commit? (Enter Y/y to commit, other to rollback)")
-                # choice = input()
-                # if choice == "Y" or choice == "y":
-                #     db.commit()
-                #     print("Commit successfully!")
-                # else:
-                #     db.rollback()
-                #     print("Rollback successfully!")
-
             except Exception as e:
                 print("Command executed failed!")
 
