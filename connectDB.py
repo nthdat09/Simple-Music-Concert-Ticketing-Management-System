@@ -1566,6 +1566,11 @@ class databaseManagerDB:
             try:
                 cursor.execute(command)
                 print("Command executed successfully!")
+                #Print out the result
+                print("Result: ")
+                result = cursor.fetchall()
+                for x in result:
+                    print(x)
 
                 print("Are you sure you want to commit? (Enter Y/y to commit, other to rollback)")
                 choice = input()
